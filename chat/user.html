@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript" src="socket.io/socket.io.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		var socket = io.connect();
+		function send()
+		{
+			var msg = document.getElementById("msg").value;
+			var name = document.getElementById("name").value;
+			var data = "<b>"+name+"</b> : "+msg+"<br />";
+			socket.emit('chat', data);
+		}
+		socket.on('chat', function(data){
+			// console.log(data);
+			document.getElementById("msg_box").innerHTML += data;
+		});
+	</script>
+</head>
+<body>
+<div class="containter">
+	<form action="" method="post">
+		Your Name <input type="Text" name="name" />
+		<input type="submit" value="submit">
+	</form>
+	
+</div>
+</body>
+</html>
